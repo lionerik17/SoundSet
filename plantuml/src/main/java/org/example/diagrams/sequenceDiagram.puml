@@ -1,0 +1,45 @@
+@startuml
+' Diagrama de secvențiere pentru un sistem educațional
+
+actor Utilizator
+actor Instructor
+actor Admin
+
+participant "Aplicație Web Utilizator" as WebAppUser
+participant "Aplicație Web Instructor" as WebAppInstructor
+participant "Aplicație Web Admin" as WebAppAdmin
+participant "Server Web" as WebServer
+participant "Business Logic" as BusinessLogic
+participant "Baza de Date" as Database
+
+' Secvență pentru Utilizator
+Utilizator -> WebAppUser : Accesează lecția
+WebAppUser -> WebServer : Solicitat lecția
+WebServer -> BusinessLogic : Procesat solicitare
+BusinessLogic -> Database : Interogare lecție
+Database -> BusinessLogic : Returnat date lecție
+BusinessLogic -> WebServer : Returnat date procesate
+WebServer -> WebAppUser : Returnat lecție
+WebAppUser -> Utilizator : Afișat lecția
+
+' Secvență pentru Instructor
+Instructor -> WebAppInstructor : Actualizează lecția
+WebAppInstructor -> WebServer : Trimite date actualizate lecție
+WebServer -> BusinessLogic : Procesat actualizare lecție
+BusinessLogic -> Database : Actualizare lecție în baza de date
+Database -> BusinessLogic : Confirmare actualizare
+BusinessLogic -> WebServer : Confirmare actualizare
+WebServer -> WebAppInstructor : Confirmare actualizare
+WebAppInstructor -> Instructor : Afișat confirmare actualizare
+
+' Secvență pentru Admin
+Admin -> WebAppAdmin : Gestionează utilizatori
+WebAppAdmin -> WebServer : Trimite date gestionare utilizatori
+WebServer -> BusinessLogic : Procesat gestionare utilizatori
+BusinessLogic -> Database : Interogare și actualizare utilizatori
+Database -> BusinessLogic : Confirmare gestionare
+BusinessLogic -> WebServer : Confirmare gestionare
+WebServer -> WebAppAdmin : Confirmare gestionare
+WebAppAdmin -> Admin : Afișat confirmare gestionare
+
+@enduml

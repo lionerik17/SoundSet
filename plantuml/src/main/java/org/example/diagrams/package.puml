@@ -1,0 +1,74 @@
+@startuml
+' Diagrama de pachete
+
+package "Autentificare" {
+  class User {
+    +String username
+    +String password
+    +String email
+    +register()
+    +login()
+    +logout()
+  }
+}
+
+package "Lecții" {
+  class Lesson {
+    +String title
+    +String description
+    +Video video
+    +uploadResources()
+    +viewLesson()
+  }
+}
+
+package "Resurse" {
+  class Resource {
+    +String title
+    +Link link
+    +Video video
+    +viewResource()
+  }
+}
+
+package "Forum" {
+  class Forum {
+    +Student student
+    +Instructor instructor
+    +String interactionDetails
+    +postToForum()
+  }
+}
+
+package "Utilizatori" {
+  class Student {
+    +int progress
+    +accessLessons()
+    +trackProgress()
+    +interactWithInstructors()
+    +interactWithStudents()
+  }
+
+  class Instructor {
+    +createLessons()
+    +manageLessons()
+    +uploadResources()
+    +monitorStudentProgress()
+    +interactWithStudents()
+  }
+
+  class Admin {
+    +manageUsers()
+    +manageInstructors()
+    +updateResources()
+    +manageNotifications()
+  }
+}
+
+' Relatii intre pachete
+Autentificare --> Utilizatori: autentificare
+Lecții --> Resurse: utilizează
+Forum --> Utilizatori: permite interacțiuni
+Utilizatori --> Forum: postează în forum
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+' Diagrama de desfășurare pentru un sistem educațional
+
+node "Client" {
+    component "Aplicație Web Utilizator" as WebAppUser
+    component "Aplicație Web Instructor" as WebAppInstructor
+    component "Aplicație Web Admin" as WebAppAdmin
+}
+
+node "Server Aplicație" {
+    component "Server Web" as WebServer
+    component "Business Logic" as BusinessLogic
+}
+
+node "Server Baza de Date" {
+    component "Baza de Date" as Database
+}
+
+WebAppUser --> WebServer : Accesare lecții
+WebAppInstructor --> WebServer : Gestionare lecții
+WebAppAdmin --> WebServer : Administrare utilizatori
+
+WebServer --> BusinessLogic : Procesare cereri
+BusinessLogic --> Database : Interogare și actualizare date
+Database --> BusinessLogic : Returnare rezultate
+BusinessLogic --> WebServer : Răspuns
+WebServer --> WebAppUser : Răspuns utilizator
+WebServer --> WebAppInstructor : Răspuns instructor
+WebServer --> WebAppAdmin : Răspuns admin
+
+@enduml

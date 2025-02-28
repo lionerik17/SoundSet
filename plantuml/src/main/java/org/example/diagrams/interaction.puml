@@ -1,0 +1,68 @@
+@startuml
+' Diagrama de interacțiune pe baza diagramei de clase
+
+actor Utilizator
+
+participant "Interfața Utilizator" as UI
+participant "Sistemul de Autentificare" as Auth
+participant "Sistemul de Lecții" as LessonSys
+participant "Sistemul de Resurse" as ResourceSys
+participant "Sistemul de Forum" as ForumSys
+participant "Sistemul de Gestionare Utilizatori" as UserSys
+participant "Sistemul de Gestionare Instructori" as InstructorSys
+
+' Fluxul pentru un utilizator (student)
+Utilizator -> UI: login()
+UI -> Auth: authenticate(username, password)
+Auth --> UI: authentication result
+
+alt Student logat
+    UI -> LessonSys: accessLessons()
+    LessonSys --> UI: list of lessons
+    Utilizator -> UI: selectLesson()
+    UI -> LessonSys: viewLesson(lessonId)
+    LessonSys --> UI: lesson details
+    LessonSys -> ResourceSys: getResources(lessonId)
+    ResourceSys --> LessonSys: resources for the lesson
+    LessonSys --> UI: display lesson with resources
+
+    Utilizator -> UI: postToForum(forumMessage)
+    UI -> ForumSys: postToForum(forumMessage)
+    ForumSys --> UI: confirmation of post
+    ForumSys -> Instructor: notify about new post
+end
+
+' Fluxul pentru instructor
+alt Instructor logat
+    Utilizator -> UI: login()
+    UI -> Auth: authenticate(username, password)
+    Auth --> UI: authentication result
+
+    UI -> LessonSys: createLesson(lessonDetails)
+    LessonSys --> UI: lesson created
+    UI -> ResourceSys: uploadResources(resourceDetails)
+    ResourceSys --> UI: resources uploaded
+    UI -> ForumSys: postToForum(forumMessage)
+    ForumSys --> UI: confirmation of post
+    ForumSys -> Student: notify about new post
+end
+
+' Fluxul pentru admin
+alt Admin logat
+    Utilizator -> UI: login()
+    UI -> Auth: authenticate(username, password)
+    Auth --> UI: authentication result
+
+    UI -> UserSys: manageUsers()
+    UserSys --> UI: user management completed
+    UI -> InstructorSys: manageInstructors()
+    InstructorSys --> UI: instructor management completed
+    UI -> ResourceSys: updateResources()
+    ResourceSys --> UI: resources updated
+    UI -> ForumSys: postToForum(forumMessage)
+    ForumSys --> UI: confirmation of post
+    ForumSys -> Student: notify about new post
+    ForumSys -> Instructor: notify about new post
+end
+
+@enduml

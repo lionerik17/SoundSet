@@ -1,0 +1,36 @@
+@startuml
+' Diagrama de tranziție de stări
+
+state "Utilizator" as U {
+  [*] --> Înregistrare
+  Înregistrare --> Autentificat : succes
+
+  Autentificat --> AccesareLecții : selectează lecție
+  AccesareLecții --> UrmărireProgres : completare lecție
+  UrmărireProgres --> Interacțiune : comentarii/intreracțiune
+  Interacțiune --> Deautentificare : finalizare sesiune
+  Deautentificare --> [*]
+}
+
+'state "Instructor" as I {
+'  [*] --> Autentificat
+'  Autentificat --> CreareLecții : adaugă lecție
+'  CreareLecții --> GestionareLecții : gestionează lecții existente
+'  GestionareLecții --> ÎncărcareResurse : adaugă resurse
+'  ÎncărcareResurse --> MonitorizareProgres : urmărește progres utilizatori
+'  MonitorizareProgres --> Interacțiune : interacționează cu utilizatorii
+'  Interacțiune --> Deautentificare : finalizare sesiune
+'  Deautentificare --> [*]
+'}
+'
+'state "Admin" as A {
+'  [*] --> Autentificat
+'  Autentificat --> GestionareUtilizatori : adaugă/editează utilizatori
+'  GestionareUtilizatori --> GestionareInstructori : adaugă/editează instructori
+'  GestionareInstructori --> ActualizareResurse : actualizează resurse
+'  ActualizareResurse --> GestionareNotificări : gestionează notificări
+'  GestionareNotificări --> Deautentificare : finalizare sesiune
+'  Deautentificare --> [*]
+'}
+
+@enduml

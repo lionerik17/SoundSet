@@ -1,0 +1,57 @@
+@startuml
+' Exemplu de diagramă de obiecte bazată pe diagrama de clase
+
+object user1 {
+  username = "studentUser"
+  password = "password123"
+  email = "student@example.com"
+}
+
+object user2 {
+  username = "instructorUser"
+  password = "password123"
+  email = "instructor@example.com"
+}
+
+object user3 {
+  username = "adminUser"
+  password = "password123"
+  email = "admin@example.com"
+}
+
+object student1 {
+  progress = 75
+}
+
+object instructor1 {
+}
+
+object admin1 {
+}
+
+object lesson1 {
+  title = "Guitar Basics"
+  description = "Introduction to Guitar"
+  video = "guitar_basics.mp4"
+}
+
+object resource1 {
+  title = "Guitar Chords"
+  link = "chords_link"
+  video = "chords_video.mp4"
+}
+
+object forum1 {
+  interactionDetails = "Student asks about guitar techniques"
+}
+
+user1 -- student1 : "instance of"
+user2 -- instructor1 : "instance of"
+user3 -- admin1 : "instance of"
+
+student1 -- forum1 : "posts in"
+instructor1 -- forum1 : "posts in"
+
+instructor1 -- lesson1 : "creates"
+lesson1 -- resource1 : "has resource"
+@enduml

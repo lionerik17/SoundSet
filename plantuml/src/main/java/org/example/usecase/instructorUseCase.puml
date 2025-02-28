@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+' Definire actor
+:Instructor: as Instructor
+
+' Definire sarcini specifice instructorului ca cazuri de utilizare
+(Crearea și gestionarea lecțiilor de chitară) as (ManageLessons)
+(Încărcarea resurselor educaționale) as (UploadResources)
+(Monitorizarea progresului utilizatorilor) as (MonitorProgress)
+
+' Definire pre-condiții și post-condiții pentru instructor ca note
+note right of Instructor
+Pre-condiții:
+- Instructorul trebuie să fie autentificat pentru a accesa și gestiona conținutul
+Post-condiții:
+- Instructorul trebuie să se delogheze la finalul sesiunii
+end note
+
+' Conexiuni pentru instructor
+Instructor --> (ManageLessons)
+Instructor --> (UploadResources)
+Instructor --> (MonitorProgress)
+
+@enduml

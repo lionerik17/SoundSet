@@ -1,0 +1,48 @@
+@startuml
+|Utilizator General|
+start
+:Înregistrare;
+:Introducere date;
+:Trimite date;
+
+|Sistem|
+:Verifică date;
+:Date valide?;
+
+if (Date valide?) then (da)
+  :Autentificare;
+  :Introducere credențiale;
+  :Trimite credențiale;
+
+  :Verifică credențiale;
+  :Credențiale valide?;
+
+  if (Credențiale valide?) then (da)
+    :Determinare rol;
+    :Rol Utilizator?;
+
+    if (Rol Utilizator?) then (Student)
+      :Accesare lecții;
+      :Urmărire progres;
+      :Interacțiune cu instructori și utilizatori;
+    else if (Instructor)
+      :Creare și gestionare lecții;
+      :Încărcare resurse;
+      :Monitorizare progres utilizatori;
+      :Interacțiune cu utilizatori;
+    else (Admin)
+      :Gestionare utilizatori și instructori;
+      :Actualizare resurse și conținut;
+      :Gestionare notificări;
+    endif
+
+    :Deautentificare;
+  else (nu)
+    :Eroare autentificare;
+  endif
+else (nu)
+  :Eroare înregistrare;
+endif
+
+stop
+@enduml

@@ -1,0 +1,72 @@
+@startuml
+' Set the layout direction to left-right
+left to right direction
+
+' Diagrama de componente cu Firebase (organizată vertical și cu Firebase la mijloc)
+
+package "Sistemul de Autentificare" {
+  [Componente Autentificare]
+  [Autentificare Firebase]
+  [Login/Logout]
+}
+
+package "Sistemul de Lecții" {
+  [Componente Lecții]
+  [Creare Lecții]
+  [Vizualizare Lecții]
+  [Management Lecții]
+}
+
+package "Sistemul de Resurse" {
+  [Componente Resurse]
+  [Încărcare Resurse]
+  [Vizualizare Resurse]
+}
+
+' Pachetul Firebase la mijloc
+package "Firebase" {
+  [Firestore]
+  [Firebase Authentication]
+  [Firebase Cloud Messaging]
+}
+
+package "Sistemul de Forum" {
+  [Componente Forum]
+  [Gestionare Forum]
+  [Interacțiune Forum]
+}
+
+package "Sistemul de Utilizatori" {
+  [Gestionare Utilizatori]
+  [Gestionare Instructori]
+  [Interacțiune Utilizatori]
+  [Gestionare Notificări]
+}
+
+' Relațiile dintre componente
+
+[Autentificare Firebase] --> [Componente Autentificare] : autentificare
+[Componente Autentificare] --> [Firebase Authentication] : autentificare utilizatori
+
+[Creare Lecții] --> [Componente Lecții] : utilizare
+[Vizualizare Lecții] --> [Componente Lecții] : utilizare
+[Management Lecții] --> [Componente Lecții] : utilizare
+[Componente Lecții] --> [Firestore] : stocare lecții
+
+[Încărcare Resurse] --> [Componente Resurse] : utilizare
+[Vizualizare Resurse] --> [Componente Resurse] : utilizare
+[Componente Resurse] --> [Firestore] : stocare resurse
+
+[Gestionare Forum] --> [Componente Forum] : utilizare
+[Interacțiune Forum] --> [Componente Forum] : utilizare
+[Componente Forum] --> [Firestore] : salvare mesaje forum
+
+[Gestionare Utilizatori] --> [Firestore] : actualizare utilizatori
+[Gestionare Instructori] --> [Firestore] : actualizare instructori
+[Interacțiune Utilizatori] --> [Firestore] : salvare activități utilizator
+
+[Gestionare Notificări] --> [Firebase Cloud Messaging] : trimite notificări
+[Firebase Cloud Messaging] --> [Componente Forum] : trimite notificări utilizatorilor
+[Login/Logout] --> [Componente Autentificare] : gestionează sesiune
+
+@enduml

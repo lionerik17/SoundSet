@@ -1,0 +1,46 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam classFontSize 12
+skinparam nodeFontSize 12
+
+class FirebaseConfig {
+    - static instance: FirebaseConfig
+    - auth: FirebaseAuth
+    - db: FirebaseFirestore
+    - storage: FirebaseStorage
+    --
+    + getInstance(): FirebaseConfig
+    + getAuth(): FirebaseAuth
+    + getFirestore(): FirebaseFirestore
+    + getStorage(): FirebaseStorage
+}
+
+class FirebaseAuth {
+    + signIn(email: String, password: String): User
+    + signOut(): void
+    + currentUser: User
+}
+
+class FirebaseFirestore {
+    + collection(path: String): CollectionReference
+    + doc(path: String): DocumentReference
+}
+
+class FirebaseStorage {
+    + ref(path: String): StorageReference
+}
+
+class User {
+    + uid: String
+    + email: String
+    + role: String
+    + progress: Number
+}
+
+FirebaseConfig o-- FirebaseAuth : "uses"
+FirebaseConfig o-- FirebaseFirestore : "uses"
+FirebaseConfig o-- FirebaseStorage : "uses"
+FirebaseAuth o-- User : "manages"
+FirebaseFirestore o-- User : "stores"
+
+@enduml

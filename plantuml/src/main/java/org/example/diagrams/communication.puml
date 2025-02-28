@@ -1,0 +1,22 @@
+@startuml
+' Diagrama de comunicare pentru un sistem educațional
+
+actor Utilizator
+actor Instructor
+actor Admin
+
+Utilizator -> Instructor : Întrebare despre lecție
+Instructor -> Utilizator : Răspuns la întrebare
+Utilizator -> Admin : Raportează problemă tehnică
+Instructor -> Admin : Raportează problemă tehnică
+Admin -> Utilizator : Confirmare primire raport
+Admin -> Instructor : Confirmare primire raport
+'Admin -> Instructor : Notificare despre feedback-ul utilizatorului
+'Instructor -> Admin : Răspunde la notificare
+
+Utilizator -> Utilizator : Interacțiune pe forum
+Instructor -> Utilizator : Feedback pe progres
+Admin -> Utilizator : Notificare actualizare sistem
+Admin -> Instructor : Notificare actualizare sistem
+
+@enduml

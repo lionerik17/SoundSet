@@ -1,0 +1,29 @@
+@startuml
+' Diagrama de arhitectură generală
+
+package "Aplicația" {
+    [Interfața Utilizator] as UI
+    [Logica Aplicației] as AppLogic
+}
+
+package "Baza de Date" {
+    [Baza de Date Utilizatori] as UserDB
+    [Baza de Date Lecții] as LessonDB
+}
+
+package "Servicii Externe" {
+    [Servicii de Autentificare] as AuthService
+    [Servicii de Notificare] as NotificationService
+}
+
+' Conexiuni
+Utilizator --> UI : Interacțiune
+Instructor --> UI : Interacțiune
+Admin --> UI : Interacțiune
+UI --> AppLogic : Cereri
+AppLogic --> UserDB : Acces date utilizatori
+AppLogic --> LessonDB : Acces date lecții
+AppLogic --> AuthService : Autentificare utilizator
+AppLogic --> NotificationService : Notificări
+
+@enduml

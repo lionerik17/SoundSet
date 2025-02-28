@@ -1,0 +1,65 @@
+@startuml
+entity "Utilizatori" as U {
+  +ID: int
+  Username: string
+  Email: string
+  Parola: string
+  TipUtilizator: string
+}
+
+entity "Instructori" as I {
+  +ID: int
+  Username: string
+  Email: string
+  Telefon: string
+}
+
+entity "Lecții" as L {
+  +ID: int
+  Titlu: string
+  Descriere: string
+  InstructorID: int
+  DataCreare: datetime
+}
+
+entity "Resurse" as R {
+  +ID: int
+  Username: string
+  Tip: string
+  Link: string
+  LecțieID: int
+}
+
+entity "Forum" as F {
+  +ID: int
+  Titlu: string
+  Descriere: string
+  DataCreare: datetime
+}
+
+entity "Mesaje Forum" as MF {
+  +ID: int
+  ForumID: int
+  UtilizatorID: int
+  Mesaj: string
+  DataPostare: datetime
+}
+
+entity "Notificări" as N {
+  +ID: int
+  UtilizatorID: int
+  Tip: string
+  Mesaj: string
+  DataTrimitere: datetime
+}
+
+' Relațiile între entități
+U ||--o{ I : "Este instructor"
+U ||--o{ L : "Creează lecții"
+I ||--o{ L : "Instruiește lecții"
+L ||--o{ R : "Contine resurse"
+F ||--o{ MF : "Contine mesaje"
+U ||--o{ MF : "Postează mesaje pe forum"
+U ||--o{ N : "Primește notificări"
+
+@enduml

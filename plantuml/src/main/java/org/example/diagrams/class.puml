@@ -1,0 +1,95 @@
+@startuml
+class User {
+  +int ID
+  +String username
+  +String password
+  +String email
+  +register()
+  +login()
+  +logout()
+}
+
+class Student {
+  +int progress
+  +accessLessons()
+  +trackProgress()
+  +interactWithInstructors()
+  +interactWithStudents()
+}
+
+class Instructor {
+  +int instructorID
+  +createLessons()
+  +manageLessons()
+  +uploadResources()
+  +monitorStudentProgress()
+  +interactWithStudents()
+}
+
+class Admin {
+  +int adminID
+  +manageUsers()
+  +manageInstructors()
+  +updateResources()
+  +manageNotifications()
+}
+
+class Lesson {
+  +int ID
+  +String title
+  +String description
+  +Date dateCreated
+  +Instructor instructor
+  +uploadResources()
+  +viewLesson()
+}
+
+class Resource {
+  +int ID
+  +String title
+  +String link
+  +String type
+  +Lesson lesson
+  +viewResource()
+}
+
+class Forum {
+  +int ID
+  +String title
+  +String description
+  +Date dateCreated
+  +postToForum()
+}
+
+class ForumMessage {
+  +int ID
+  +String messageContent
+  +Date postDate
+  +Student student
+  +Instructor instructor
+  +Forum forum
+  +postMessage()
+}
+
+class Notification {
+  +int ID
+  +String message
+  +Date sentDate
+  +Student student
+  +Instructor instructor
+  +sendNotification()
+}
+
+User <|-- Student
+User <|-- Instructor
+User <|-- Admin
+Instructor "1" -- "0..*" Lesson
+Lesson "1" -- "0..*" Resource
+Student "0..*" -- "0..*" ForumMessage : "posts in"
+Instructor "0..*" -- "0..*" ForumMessage : "posts in"
+Student "0..*" -- "0..*" Student : "interacts with"
+Forum "1" -- "0..*" ForumMessage : "contains"
+Student "0..*" -- "0..*" Notification : "receives"
+Instructor "0..*" -- "0..*" Notification : "receives"
+
+@enduml

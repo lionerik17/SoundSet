@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+' Definire actori
+:Utilizator: as User
+
+' Definire sarcini specifice utilizatorului ca cazuri de utilizare
+(Înregistrare) as (Register)
+(Accesarea lecțiilor disponibile) as (AccessLessons)
+(Urmărirea progresului propriu) as (TrackProgress)
+(Interacțiunea cu instructorii și utilizatorii) as (Interact)
+
+' Definire pre-condiții și post-condiții pentru utilizator ca note
+note right of User
+Pre-condiții:
+- Utilizatorul trebuie să fie autentificat pentru a accesa lecțiile și resursele complete
+Post-condiții:
+- Utilizatorul trebuie să se delogheze la finalul sesiunii
+end note
+
+' Conexiuni pentru utilizator
+User --> (Register)
+User --> (AccessLessons)
+User --> (TrackProgress)
+User --> (Interact)
+
+@enduml

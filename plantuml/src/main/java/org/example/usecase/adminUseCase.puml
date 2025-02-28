@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+' Definire actori
+:Admin: as Admin
+
+' Definirea cazului principal de utilizare
+(Folosirea aplicației) as (Use)
+
+' Definire sarcini specifice administratorului ca cazuri de utilizare
+(Gestionarea utilizatorilor și instructorilor) as (ManageUsers)
+(Actualizarea resurselor și a conținutului) as (UpdateContent)
+(Gestionarea notificărilor) as (ManageNotifications)
+
+' Definire pre-condiții și post-condiții ca note
+note right of Admin
+Pre-condiții:
+- Administratorul trebuie să fie autentificat
+Post-condiții:
+- Administratorul trebuie să se delogheze la finalul sesiunii
+end note
+
+' Conexiuni
+
+Admin ---> (Use)
+Admin --> (ManageUsers)
+Admin --> (UpdateContent)
+Admin --> (ManageNotifications)
+
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+' Diagrama de flux de activități
+
+'|Utilizator|
+'start
+':Înregistrare;
+':Autentificare;
+':Accesarea lecțiilor disponibile;
+':Urmărirea progresului propriu;
+':Interacțiunea cu instructorii și utilizatorii;
+':Deautentificare;
+'stop
+
+' |Instructor|
+' start
+' :Autentificare;
+' :Crearea și gestionarea lecțiilor de chitară;
+' :Încărcarea resurselor educaționale;
+' :Monitorizarea progresului utilizatorilor;
+' :Interacțiunea cu utilizatorii;
+' :Deautentificare;
+' stop
+
+ |Admin|
+ start
+ :Autentificare;
+ :Gestionarea utilizatorilor și instructorilor;
+ :Actualizarea resurselor și conținutului educațional;
+ :Gestionarea notificărilor;
+ :Deautentificare;
+ stop
+
+@enduml
